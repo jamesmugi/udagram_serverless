@@ -7,9 +7,9 @@ plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
   - serverless-reqvalidator-plugin
-  #- serverless-aws-documentation
+  - serverless-aws-documentation
   
-configValidationMode: error
+configValidationMode: off
 provider:
   name: aws
   runtime: nodejs12.x
@@ -119,11 +119,11 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
-          #documentation:
-            #summary: "Create a new todo item"
-            #description: "Create a new todo item"
-           #requestModels:
-            #  "application/json": CreateTodoRequest
+          documentation:
+            summary: "Create a new todo item"
+            description: "Create a new todo item"
+            requestModels:
+              "application/json": CreateTodoRequest
           reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: ${self:provider.environment.PROJECT_NAME}-create-todo-role-${self:provider.stage}
     iamRoleStatements:
@@ -148,11 +148,11 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
-          #documentation:
-           # summary: "Update a todo item"
-            #description: "Update a todo item"
-            #requestModels:
-             # "application/json": UpdateTodoRequest
+          documentation:
+            summary: "Update a todo item"
+            description: "Update a todo item"
+            requestModels:
+             "application/json": UpdateTodoRequest
           reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: ${self:provider.environment.PROJECT_NAME}-update-todo-role-${self:provider.stage}
     iamRoleStatements:
